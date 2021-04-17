@@ -162,17 +162,14 @@ var ulGallery = [{
   description: 'Lighthouse Coast Sea'
 }];
 exports.ulGallery = ulGallery;
-},{}],"js/index.js":[function(require,module,exports) {
+},{}],"js/make-gallery.js":[function(require,module,exports) {
 "use strict";
 
-var _galleryItems = require("./gallery-items");
-
-// Создание разметки 
-var listGalleryEl = document.querySelector('.js-gallery');
-var lightboxButtonEl = document.querySelector('button[data-action="close-lightbox"]');
-var lightboxEl = document.querySelector('.js-lightbox');
-var lightboxImageEl = lightboxEl.querySelector('.lightbox__image');
-var lightboxOverlayEl = lightboxEl.querySelector('.lightbox__overlay'); //makeGallery
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.makeGallery = void 0;
+var listGalleryEl = document.querySelector('.js-gallery'); //makeGallery
 
 var makeGallery = function makeGallery(array) {
   var result = array.map(function (_ref) {
@@ -184,7 +181,25 @@ var makeGallery = function makeGallery(array) {
   listGalleryEl.innerHTML = result.join('');
 };
 
-makeGallery(_galleryItems.ulGallery); //loading = 'lazy';
+exports.makeGallery = makeGallery;
+},{}],"js/tests.js":[function(require,module,exports) {
+var a = console.log('gggg');
+},{}],"js/index.js":[function(require,module,exports) {
+"use strict";
+
+var _galleryItems = require("./gallery-items");
+
+var _makeGallery = require("./make-gallery");
+
+var _tests = require("./tests");
+
+// Создание разметки 
+var listGalleryEl = document.querySelector('.js-gallery');
+var lightboxButtonEl = document.querySelector('button[data-action="close-lightbox"]');
+var lightboxEl = document.querySelector('.js-lightbox');
+var lightboxImageEl = lightboxEl.querySelector('.lightbox__image');
+var lightboxOverlayEl = lightboxEl.querySelector('.lightbox__overlay');
+(0, _makeGallery.makeGallery)(_galleryItems.ulGallery); //loading = 'lazy';
 // const arrImgPreviewEl = listGalleryEl.querySelectorAll('.gallery__image');
 // if ('loading' in HTMLImageElement.prototype) {
 //   arrImgPreviewEl.forEach(img => {
@@ -199,7 +214,7 @@ makeGallery(_galleryItems.ulGallery); //loading = 'lazy';
 //   bodyEl.append(scriptEl);
 //   img.classList.add('lazyload');
 // }
-//Делигирование 
+//Делигирование
 
 listGalleryEl.addEventListener('click', openGallery);
 lightboxEl.removeEventListener('click', closeModal);
@@ -284,7 +299,9 @@ function findIndex() {
     }
   });
 }
-},{"./gallery-items":"js/gallery-items.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+;
+},{"./gallery-items":"js/gallery-items.js","./make-gallery":"js/make-gallery.js","./tests":"js/tests.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -312,7 +329,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59722" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54635" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

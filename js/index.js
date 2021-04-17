@@ -2,26 +2,13 @@ import { ulGallery } from './gallery-items';
 
 // Создание разметки 
 const listGalleryEl = document.querySelector('.js-gallery');
-
 const lightboxButtonEl = document.querySelector('button[data-action="close-lightbox"]');
 const lightboxEl = document.querySelector('.js-lightbox');
 const lightboxImageEl = lightboxEl.querySelector('.lightbox__image');
 const lightboxOverlayEl = lightboxEl.querySelector('.lightbox__overlay');
 
-//makeGallery
-const makeGallery = (array) => {
-    const result = array.map(({ preview, original, description }) =>
-        `<li class="gallery__item">
-  <a class="gallery__link"
-    href=${original}>
-    <img class="gallery__image"
-      src=${preview}
-      data-source=${original}
-      alt='${description}'/>
-  </a>
-</li>`);
-    listGalleryEl.innerHTML = result.join('');
-};
+
+import { makeGallery } from './make-gallery';
 makeGallery(ulGallery);
 
 //loading = 'lazy';
@@ -43,8 +30,7 @@ makeGallery(ulGallery);
 //   img.classList.add('lazyload');
 // }
 
-
-//Делигирование 
+//Делигирование
 listGalleryEl.addEventListener('click', openGallery);
 
 lightboxEl.removeEventListener('click', closeModal);
@@ -69,9 +55,6 @@ function addAttributeOnLightboxImage(event) {
     lightboxImageEl.src = event.target.dataset.source;
     lightboxImageEl.alt = event.target.alt;
 };
-
-
-
 
 //closing modal
 
@@ -116,5 +99,7 @@ function findIndex() {
         if (el.description === lightboxImageEl.getAttribute('alt')) {
             return indexCurrentPhoto = i;
         }
-    });
-}
+    })
+};
+
+import { a } from './tests';
