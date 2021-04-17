@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --public-url /playsoksana-goit-js-hw-09-gallery/"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/playsoksana/playsoksana-goit-js-hw-09-gallery/issues"
   },
-  "homepage": "https://github.com/playsoksana/playsoksana-goit-js-hw-09-gallery#readme",
+  "homepage": "https://playsoksana.github.io/playsoksana-goit-js-hw-09-gallery",
   "dependencies": {
     "joi": "^17.4.0"
   },
