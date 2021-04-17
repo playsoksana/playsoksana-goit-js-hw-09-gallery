@@ -1,0 +1,27 @@
+{
+  "name": "playsoksana-goit-js-hw-09-gallery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/playsoksana/playsoksana-goit-js-hw-09-gallery.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/playsoksana/playsoksana-goit-js-hw-09-gallery/issues"
+  },
+  "homepage": "https://github.com/playsoksana/playsoksana-goit-js-hw-09-gallery#readme",
+  "dependencies": {
+    "joi": "^17.4.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
