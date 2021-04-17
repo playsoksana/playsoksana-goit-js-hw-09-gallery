@@ -1,9 +1,9 @@
-const listGalleryEl = document.querySelector('.js-gallery');
+import { refs } from './index';
 
 //makeGallery
 export const makeGallery = (array) => {
-    const result = array.map(({ preview, original, description }) =>
-        `<li class="gallery__item">
+  const result = array.map(({ preview, original, description }) =>
+    `<li class="gallery__item">
   <a class="gallery__link"
     href=${original}>
     <img class="gallery__image"
@@ -12,5 +12,5 @@ export const makeGallery = (array) => {
       alt='${description}'/>
   </a>
 </li>`);
-    listGalleryEl.innerHTML = result.join('');
+  refs.listGalleryEl.innerHTML = result.join('');
 };

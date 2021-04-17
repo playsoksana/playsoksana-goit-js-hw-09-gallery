@@ -169,8 +169,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.makeGallery = void 0;
-var listGalleryEl = document.querySelector('.js-gallery'); //makeGallery
 
+var _index = require("./index");
+
+//makeGallery
 var makeGallery = function makeGallery(array) {
   var result = array.map(function (_ref) {
     var preview = _ref.preview,
@@ -178,78 +180,66 @@ var makeGallery = function makeGallery(array) {
         description = _ref.description;
     return "<li class=\"gallery__item\">\n  <a class=\"gallery__link\"\n    href=".concat(original, ">\n    <img class=\"gallery__image\"\n      src=").concat(preview, "\n      data-source=").concat(original, "\n      alt='").concat(description, "'/>\n  </a>\n</li>");
   });
-  listGalleryEl.innerHTML = result.join('');
+  _index.refs.listGalleryEl.innerHTML = result.join('');
 };
 
 exports.makeGallery = makeGallery;
-},{}],"js/tests.js":[function(require,module,exports) {
-var a = console.log('gggg');
-},{}],"js/index.js":[function(require,module,exports) {
+},{"./index":"js/index.js"}],"js/function-modal-gallery.js":[function(require,module,exports) {
 "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.openGallery = void 0;
 
 var _galleryItems = require("./gallery-items");
 
-var _makeGallery = require("./make-gallery");
+var _index = require("./index");
 
-var _tests = require("./tests");
+var openGallery = function openGallery(event) {
+  _index.refs.listGalleryEl.removeEventListener('click', openGallery);
 
-// Создание разметки 
-var listGalleryEl = document.querySelector('.js-gallery');
-var lightboxButtonEl = document.querySelector('button[data-action="close-lightbox"]');
-var lightboxEl = document.querySelector('.js-lightbox');
-var lightboxImageEl = lightboxEl.querySelector('.lightbox__image');
-var lightboxOverlayEl = lightboxEl.querySelector('.lightbox__overlay');
-(0, _makeGallery.makeGallery)(_galleryItems.ulGallery); //loading = 'lazy';
-// const arrImgPreviewEl = listGalleryEl.querySelectorAll('.gallery__image');
-// if ('loading' in HTMLImageElement.prototype) {
-//   arrImgPreviewEl.forEach(img => {
-//     img.setAttribute('data-src', img.src);
-//     img.setAttribute('loading', 'lazy');
-//   });
-// } else {
-//   const scriptEl = document.createElement('script');
-//   scriptEl.src = "./js/lazysizes.min.js";
-//   scriptEl.async = "";
-//   const bodyEl = document.querySelector('body');
-//   bodyEl.append(scriptEl);
-//   img.classList.add('lazyload');
-// }
-//Делигирование
+  _index.refs.lightboxEl.addEventListener('click', closeModal);
 
-listGalleryEl.addEventListener('click', openGallery);
-lightboxEl.removeEventListener('click', closeModal);
-window.removeEventListener('keydown', closeModal);
-lightboxButtonEl.removeEventListener('click', closeModal);
-
-function openGallery(event) {
-  listGalleryEl.removeEventListener('click', openGallery);
-  lightboxEl.addEventListener('click', closeModal);
   window.addEventListener('keydown', closeModal);
-  lightboxButtonEl.addEventListener('click', closeModal);
+
+  _index.refs.lightboxButtonEl.addEventListener('click', closeModal);
+
   window.addEventListener('keyup', flickThrough);
   event.preventDefault();
 
   if (!event.target.classList.contains('gallery__image')) {}
 
-  lightboxEl.classList.add('is-open');
-  addAttributeOnLightboxImage(event);
-}
+  _index.refs.lightboxEl.classList.add('is-open');
 
-;
+  addAttributeOnLightboxImage(event);
+};
+
+exports.openGallery = openGallery;
 
 function addAttributeOnLightboxImage(event) {
-  lightboxImageEl.src = event.target.dataset.source;
-  lightboxImageEl.alt = event.target.alt;
+  _index.refs.lightboxImageEl.src = event.target.dataset.source;
+  _index.refs.lightboxImageEl.alt = event.target.alt;
 }
 
 ; //closing modal
 
 function closeModal(event) {
-  if (event.target.nodeName === 'BUTTON' || event.code === 'Escape' || event.target === lightboxOverlayEl) {
-    listGalleryEl.addEventListener('click', openGallery);
-    lightboxEl.classList.remove('is-open');
-    lightboxImageEl.removeAttribute('src');
-    lightboxImageEl.removeAttribute('alt');
+  if (event.target.nodeName === 'BUTTON' || event.code === 'Escape' || event.target === _index.refs.lightboxOverlayEl) {
+    _index.refs.listGalleryEl.addEventListener('click', openGallery);
+
+    _index.refs.lightboxEl.removeEventListener('click', closeModal);
+
+    window.removeEventListener('keydown', closeModal);
+
+    _index.refs.lightboxButtonEl.removeEventListener('click', closeModal);
+
+    _index.refs.lightboxEl.classList.remove('is-open');
+
+    _index.refs.lightboxImageEl.removeAttribute('src');
+
+    _index.refs.lightboxImageEl.removeAttribute('alt');
+
     window.removeEventListener('keyup', flickThrough);
   }
 
@@ -269,9 +259,9 @@ function flickThrough(event) {
     }
 
     ;
-    lightboxImageEl.src = _galleryItems.ulGallery[indexCurrentPhoto + 1].original;
-    lightboxImageEl.alt = _galleryItems.ulGallery[indexCurrentPhoto + 1].description;
-    return lightboxImageEl;
+    _index.refs.lightboxImageEl.src = _galleryItems.ulGallery[indexCurrentPhoto + 1].original;
+    _index.refs.lightboxImageEl.alt = _galleryItems.ulGallery[indexCurrentPhoto + 1].description;
+    return _index.refs.lightboxImageEl;
   }
 
   ;
@@ -282,9 +272,9 @@ function flickThrough(event) {
     }
 
     ;
-    lightboxImageEl.src = _galleryItems.ulGallery[indexCurrentPhoto - 1].original;
-    lightboxImageEl.alt = _galleryItems.ulGallery[indexCurrentPhoto - 1].description;
-    return lightboxImageEl;
+    _index.refs.lightboxImageEl.src = _galleryItems.ulGallery[indexCurrentPhoto - 1].original;
+    _index.refs.lightboxImageEl.alt = _galleryItems.ulGallery[indexCurrentPhoto - 1].description;
+    return _index.refs.lightboxImageEl;
   }
 
   ;
@@ -294,14 +284,52 @@ function flickThrough(event) {
 
 function findIndex() {
   _galleryItems.ulGallery.forEach(function (el, i) {
-    if (el.description === lightboxImageEl.getAttribute('alt')) {
+    if (el.description === _index.refs.lightboxImageEl.getAttribute('alt')) {
       return indexCurrentPhoto = i;
     }
   });
 }
 
 ;
-},{"./gallery-items":"js/gallery-items.js","./make-gallery":"js/make-gallery.js","./tests":"js/tests.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./gallery-items":"js/gallery-items.js","./index":"js/index.js"}],"js/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.refs = void 0;
+
+var _galleryItems = require("./gallery-items");
+
+var _makeGallery = require("./make-gallery");
+
+var _functionModalGallery = require("./function-modal-gallery");
+
+var refs = {
+  listGalleryEl: document.querySelector('.js-gallery'),
+  lightboxButtonEl: document.querySelector('button[data-action="close-lightbox"]'),
+  lightboxEl: document.querySelector('.js-lightbox'),
+  lightboxImageEl: document.querySelector('.lightbox__image'),
+  lightboxOverlayEl: document.querySelector('.lightbox__overlay'),
+  arrImgPreviewEl: document.querySelectorAll('.gallery__image')
+};
+exports.refs = refs;
+(0, _makeGallery.makeGallery)(_galleryItems.ulGallery);
+refs.listGalleryEl.addEventListener('click', _functionModalGallery.openGallery); //lazy
+// if ('loading' in HTMLImageElement.prototype) {
+//     refs.arrImgPreviewEl.forEach(img => {
+//         img.setAttribute('data-src', img.src);
+//         img.setAttribute('loading', 'lazy');
+//     });
+// } else {
+//     const scriptEl = document.createElement('script');
+//     scriptEl.src = "./js/lazysizes.min.js";
+//     scriptEl.async = "";
+//     const bodyEl = document.querySelector('body');
+//     bodyEl.append(scriptEl);
+//     img.classList.add('lazyload');
+// };
+},{"./gallery-items":"js/gallery-items.js","./make-gallery":"js/make-gallery.js","./function-modal-gallery":"js/function-modal-gallery.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -329,7 +357,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54635" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65090" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
