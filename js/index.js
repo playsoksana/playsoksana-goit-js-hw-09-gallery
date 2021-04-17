@@ -102,7 +102,6 @@ function flickThrough(event) {
     };
 
     if (event.code === 'ArrowLeft') {
-
         if (indexCurrentPhoto === 0) {
             indexCurrentPhoto = ulGallery.length;
         };
